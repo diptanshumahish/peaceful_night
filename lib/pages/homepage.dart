@@ -173,16 +173,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     fontSize: 45,
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "3 hours , until your sleep time :)",
-                  style: TextStyle(
-                    color: Colors.blue.shade100,
-                    fontSize: 40,
-                  ),
-                )
               ],
             )),
         Positioned(

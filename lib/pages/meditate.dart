@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:lottie/lottie.dart';
+
+bool isplaying = false;
+String start = "Start";
+String pause = "Pause";
 
 class Meditate extends StatefulWidget {
   const Meditate({Key? key}) : super(key: key);
@@ -44,16 +48,27 @@ class _MeditateState extends State<Meditate> {
                     end: Alignment.bottomCenter,
                     colors: [Colors.transparent, Colors.black])),
           ),
-          const Positioned(
+          Positioned(
               top: 80,
               left: 20,
-              child: Text(
-                "Meditation",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 45,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Meditation",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                    ),
+                  ),
+                  Text(
+                    "Get relaxed for a while :)",
+                    style: TextStyle(
+                      color: Colors.white.withAlpha(200),
+                      fontSize: 30,
+                    ),
+                  ),
+                ],
               )),
           Positioned(
             left: 0,
@@ -65,25 +80,71 @@ class _MeditateState extends State<Meditate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.play_circle_filled_rounded,
-                    size: 80,
-                    color: Colors.white,
-                  ),
+                  InkWell(
+                      onTap: (() {
+                        setState(() {
+                          isplaying = !isplaying;
+                        });
+                      }),
+                      child: !isplaying
+                          ? Icon(
+                              Icons.play_circle_filled_rounded,
+                              size: 80,
+                              color: Colors.white,
+                            )
+                          : Icon(
+                              Icons.pause_circle_filled_rounded,
+                              size: 80,
+                              color: Colors.white,
+                            )),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Start",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 60,
-                    ),
+                  !isplaying
+                      ? Text(
+                          start,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 60,
+                          ),
+                        )
+                      : Text(
+                          pause,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 60,
+                          ),
+                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (isplaying)
+                        LottieBuilder.asset(
+                          'assets/lottie/playing.json',
+                          width: 50,
+                          fit: BoxFit.contain,
+                        ),
+                      Text(
+                        isplaying ? "Red Medley - Whispers" : " ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-          )
+          ),
+          Positioned(
+              bottom: height / 10,
+              left: 0,
+              right: 0,
+              child: Container(
+                  height: height / 5,
+                  color: Colors.deepPurple,
+                  child: Column()))
         ],
       ),
     );
