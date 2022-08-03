@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 bool isplaying = false;
 String start = "Start";
@@ -14,17 +17,38 @@ class Meditate extends StatefulWidget {
   State<Meditate> createState() => _MeditateState();
 }
 
+final player = AudioPlayer();
+
+getSong() async {
+  final duration = await player.setUrl(
+      'https://drive.google.com/uc?export=view&id=1Ufl8hwZQVPljZyWztWfKRx0tBQstPwnM');
+}
+
+double comp = 0.0;
+
 class _MeditateState extends State<Meditate> {
+  void getTimer() {
+    Timer.periodic(Duration(milliseconds: 10), (timer) {
+      setState(() {
+        var totalDur = player.duration?.inSeconds;
+        comp = (player.position.inSeconds / ((totalDur ?? 0))).toDouble();
+      });
+    });
+  }
+
   @override
   void initState() {
-    DefaultCacheManager().emptyCache();
+    getSong();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    getTimer();
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
@@ -70,6 +94,20 @@ class _MeditateState extends State<Meditate> {
                   ),
                 ],
               )),
+          if (isplaying)
+            Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: CircularPercentIndicator(
+                  progressColor: Colors.pink.withOpacity(0.7),
+                  backgroundColor: Colors.white.withOpacity(0.1),
+                  percent: comp,
+                  animation: false,
+                  animateFromLastPercent: false,
+                  radius: 150,
+                )),
           Positioned(
             left: 0,
             right: 0,
@@ -80,23 +118,35 @@ class _MeditateState extends State<Meditate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  InkWell(
-                      onTap: (() {
-                        setState(() {
-                          isplaying = !isplaying;
-                        });
-                      }),
-                      child: !isplaying
-                          ? Icon(
-                              Icons.play_circle_filled_rounded,
-                              size: 80,
-                              color: Colors.white,
-                            )
-                          : Icon(
-                              Icons.pause_circle_filled_rounded,
-                              size: 80,
-                              color: Colors.white,
-                            )),
+                  if (!isplaying)
+                    InkWell(
+                        onTap: () {
+                          player.play();
+
+                          setState(() {
+                            isplaying = true;
+                          });
+                        },
+                        child: Icon(
+                          Icons.play_circle_filled_rounded,
+                          size: 80,
+                          color: Colors.white,
+                        )),
+                  if (isplaying)
+                    InkWell(
+                        onTap: (() {
+                          player.pause();
+
+                          setState(() {
+                            player.pause();
+                            isplaying = false;
+                          });
+                        }),
+                        child: Icon(
+                          Icons.pause_circle_filled_rounded,
+                          size: 80,
+                          color: Colors.white,
+                        )),
                   SizedBox(
                     height: 10,
                   ),
@@ -125,7 +175,7 @@ class _MeditateState extends State<Meditate> {
                           fit: BoxFit.contain,
                         ),
                       Text(
-                        isplaying ? "Red Medley - Whispers" : " ",
+                        isplaying ? "Jacob Piano -Interstellar" : " ",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -143,8 +193,15 @@ class _MeditateState extends State<Meditate> {
               right: 0,
               child: Container(
                   height: height / 5,
-                  color: Colors.deepPurple,
-                  child: Column()))
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        player.position.toString(),
+                        style: TextStyle(fontSize: 45, color: Colors.white),
+                      )
+                    ],
+                  ))),
         ],
       ),
     );

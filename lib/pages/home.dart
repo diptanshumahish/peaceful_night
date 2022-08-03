@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage> {
         body: Stack(
           children: [
             PageView(
+              controller: controller,
+              physics: BouncingScrollPhysics(),
               children: [HomePageScreen(), Meditate()],
             ),
             Positioned(

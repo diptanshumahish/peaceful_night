@@ -41,6 +41,7 @@ dependencies:
   cached_network_image: ^3.2.1
   intl: ^0.17.0
   lottie: ^1.4.0
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:
