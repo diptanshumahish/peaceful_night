@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:peaceful_night/pages/homepage.dart';
 import 'package:peaceful_night/pages/meditate.dart';
+import 'package:peaceful_night/pages/sleep.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
             PageView(
               controller: controller,
               physics: BouncingScrollPhysics(),
-              children: [HomePageScreen(), Meditate()],
+              children: [HomePageScreen(), Meditate(), Sleeppage()],
             ),
             Positioned(
                 bottom: 0,

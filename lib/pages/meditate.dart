@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
@@ -9,6 +10,11 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 bool isplaying = false;
 String start = "Start";
 String pause = "Pause";
+bool isSlected = false;
+var backColor1 = Colors.white.withOpacity(0.5);
+var backColor2 = Colors.white.withOpacity(0.5);
+var backColor3 = Colors.white.withOpacity(0.5);
+var backColor4 = Colors.white.withOpacity(0.5);
 
 class Meditate extends StatefulWidget {
   const Meditate({Key? key}) : super(key: key);
@@ -39,13 +45,6 @@ class _MeditateState extends State<Meditate> {
         }
       });
     });
-  }
-
-  @override
-  void initState() {
-    getSong();
-
-    super.initState();
   }
 
   @override
@@ -105,6 +104,169 @@ class _MeditateState extends State<Meditate> {
                   ),
                 ],
               )),
+          if (isplaying == false)
+            Positioned(
+                top: 180,
+                left: 20,
+                right: 20,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (isSlected == false)
+                      Text(
+                        "Select your desired backgrond audio",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
+                      ),
+                    if (isSlected == true)
+                      Text(
+                        "Currently playing :",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
+                      ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: (() {
+                            getSong();
+                            setState(() {
+                              isSlected = true;
+                              backColor1 = Colors.white;
+                              backColor2 = Colors.white.withOpacity(0.5);
+                              backColor3 = Colors.white.withOpacity(0.5);
+                              backColor4 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                color: backColor1),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Rain",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: (() {
+                            getSong();
+                            setState(() {
+                              isSlected = true;
+                              backColor2 = Colors.white;
+                              backColor1 = Colors.white.withOpacity(0.5);
+                              backColor3 = Colors.white.withOpacity(0.5);
+                              backColor4 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                              color: backColor2,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Ocean Waves",
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: (() {
+                            getSong();
+                            setState(() {
+                              isSlected = true;
+                              backColor3 = Colors.white;
+                              backColor2 = Colors.white.withOpacity(0.5);
+                              backColor1 = Colors.white.withOpacity(0.5);
+                              backColor4 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: backColor3,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Piano",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: (() {
+                            getSong();
+                            setState(() {
+                              isSlected = true;
+                              backColor4 = Colors.white;
+                              backColor2 = Colors.white.withOpacity(0.5);
+                              backColor3 = Colors.white.withOpacity(0.5);
+                              backColor1 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                              color: backColor4,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "ThunderStorms",
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                )),
           if (isplaying)
             Positioned(
                 left: 0,
@@ -132,11 +294,23 @@ class _MeditateState extends State<Meditate> {
                   if (!isplaying)
                     InkWell(
                         onTap: () {
-                          player.play();
+                          if (isSlected == false) {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return CupertinoAlertDialog(
+                                    title: Text("No Audio Selected"),
+                                    content: Text(
+                                        "Please select a background audio track"),
+                                  );
+                                });
+                          } else if (isSlected == true) {
+                            player.play();
 
-                          setState(() {
-                            isplaying = true;
-                          });
+                            setState(() {
+                              isplaying = true;
+                            });
+                          }
                         },
                         child: Icon(
                           Icons.play_circle_filled_rounded,
