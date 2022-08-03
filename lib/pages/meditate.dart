@@ -20,7 +20,7 @@ class Meditate extends StatefulWidget {
 final player = AudioPlayer();
 
 getSong() async {
-  final duration = await player.setUrl(
+  await player.setUrl(
       'https://drive.google.com/uc?export=view&id=1Ufl8hwZQVPljZyWztWfKRx0tBQstPwnM');
 }
 
@@ -32,6 +32,11 @@ class _MeditateState extends State<Meditate> {
       setState(() {
         var totalDur = player.duration?.inSeconds;
         comp = (player.position.inSeconds / ((totalDur ?? 0))).toDouble();
+        if (comp == 1) {
+          isplaying = false;
+          player.stop();
+          getSong();
+        }
       });
     });
   }
@@ -48,6 +53,12 @@ class _MeditateState extends State<Meditate> {
     getTimer();
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
+    String text1 = "Take deep breaths and think about something good :)";
+    String text2 = "Gently sit/sleep in a relaxing position";
+    String text3 = "Loosen your muscles , it's gonna be some good time";
+    String text4 = "Take another minute and then close your eyes gently";
+    String text5 = "We'll let you know when to get up";
 
     return SizedBox(
       height: double.infinity,
@@ -197,13 +208,79 @@ class _MeditateState extends State<Meditate> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        player.position.toString(),
+                        _printDuration(player.position),
                         style: TextStyle(fontSize: 45, color: Colors.white),
-                      )
+                      ),
+                      if (isplaying)
+                        ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  Colors.deepPurpleAccent.withOpacity(0.6)),
+                            ),
+                            onPressed: () async {
+                              await player.stop();
+
+                              setState(() {
+                                isplaying = false;
+                              });
+                              getSong();
+                            },
+                            child: Text(
+                              "Stop current session",
+                              style: TextStyle(fontSize: 30),
+                            )),
+                      Spacer(),
+                      if (comp > 0.0 && comp < 0.2)
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '" $text1 "',
+                            style: TextStyle(color: Colors.white, fontSize: 29),
+                          ),
+                        ),
+                      if (comp > 0.2 && comp < 0.3)
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '" $text2"',
+                            style: TextStyle(color: Colors.white, fontSize: 29),
+                          ),
+                        ),
+                      if (comp > 0.3 && comp < 0.4)
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '" $text3"',
+                            style: TextStyle(color: Colors.white, fontSize: 29),
+                          ),
+                        ),
+                      if (comp > 0.4 && comp < 0.5)
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '" $text4"',
+                            style: TextStyle(color: Colors.white, fontSize: 29),
+                          ),
+                        ),
+                      if (comp > 0.5 && comp < 1)
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '" $text5"',
+                            style: TextStyle(color: Colors.white, fontSize: 29),
+                          ),
+                        )
                     ],
                   ))),
         ],
       ),
     );
   }
+}
+
+String _printDuration(Duration? duration) {
+  String twoDigits(int n) => n.toString().padLeft(2, "0");
+  String twoDigitsMinutes = twoDigits(duration!.inMinutes.remainder(60));
+  String twoDigitsSeconds = twoDigits(duration.inSeconds.remainder(60));
+  return "$twoDigitsMinutes:$twoDigitsSeconds";
 }
