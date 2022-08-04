@@ -25,13 +25,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             PageView(
               controller: controller,
-              physics: BouncingScrollPhysics(),
-              children: [HomePageScreen(), Meditate(), Sleeppage()],
+              physics: const BouncingScrollPhysics(),
+              children: const [HomePageScreen(), Meditate(), Sleeppage()],
             ),
             Positioned(
                 bottom: 0,
                 left: 0,
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height / 10,
                   width: MediaQuery.of(context).size.width,
                   child: Row(
@@ -39,16 +39,17 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(CupertinoIcons.home, color: Colors.white)),
+                          icon: const Icon(CupertinoIcons.home,
+                              color: Colors.white)),
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             CupertinoIcons.circle,
                             color: Colors.white,
                           )),
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(CupertinoIcons.profile_circled,
+                          icon: const Icon(CupertinoIcons.profile_circled,
                               color: Colors.white))
                     ],
                   ),

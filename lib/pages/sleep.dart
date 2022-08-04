@@ -5,10 +5,13 @@ import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 
 bool isplaying = false;
-bool isseleted = false;
 String start = "Start";
 String pause = "Pause";
 bool isSlected = false;
+var backColor1 = Colors.white.withOpacity(0.5);
+var backColor2 = Colors.white.withOpacity(0.5);
+var backColor3 = Colors.white.withOpacity(0.5);
+var backColor4 = Colors.white.withOpacity(0.5);
 
 class Sleeppage extends StatefulWidget {
   const Sleeppage({Key? key}) : super(key: key);
@@ -40,7 +43,7 @@ class _SleeppageState extends State<Sleeppage> {
           Container(
             height: height,
             width: width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -56,7 +59,7 @@ class _SleeppageState extends State<Sleeppage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Sleep",
                     style: TextStyle(
                       color: Colors.white,
@@ -72,110 +75,170 @@ class _SleeppageState extends State<Sleeppage> {
                   ),
                 ],
               )),
-          Positioned(
-              top: 180,
-              left: 20,
-              right: 20,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (isplaying == false)
-                    Text(
-                      "Select your desired backgrond audio",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                      ),
-                    ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: width / 2.4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            color: Colors.white.withOpacity(0.5)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Rain",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: width / 2.4,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Ocean Waves",
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: width / 2.4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            color: Colors.white.withOpacity(0.5)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Piano",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: width / 2.4,
-                        decoration: BoxDecoration(
+          if (isplaying == false)
+            Positioned(
+                top: 180,
+                left: 20,
+                right: 20,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (isSlected == false)
+                      const Text(
+                        "Select your desired backgrond audio",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(3),
+                          fontSize: 25,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "ThunderStorms",
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
+                      ),
+                    if (isSlected == true)
+                      const Text(
+                        "Currently playing :",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
+                      ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: (() {
+                            setState(() {
+                              isSlected = true;
+                              backColor1 = Colors.white;
+                              backColor2 = Colors.white.withOpacity(0.5);
+                              backColor3 = Colors.white.withOpacity(0.5);
+                              backColor4 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                color: backColor1),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Rain",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ],
-              )),
+                        InkWell(
+                          onTap: (() {
+                            setState(() {
+                              isSlected = true;
+                              backColor2 = Colors.white;
+                              backColor1 = Colors.white.withOpacity(0.5);
+                              backColor3 = Colors.white.withOpacity(0.5);
+                              backColor4 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                              color: backColor2,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Ocean Waves",
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: (() {
+                            setState(() {
+                              isSlected = true;
+                              backColor3 = Colors.white;
+                              backColor2 = Colors.white.withOpacity(0.5);
+                              backColor1 = Colors.white.withOpacity(0.5);
+                              backColor4 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: backColor3,
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Piano",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: (() {
+                            setState(() {
+                              isSlected = true;
+                              backColor4 = Colors.white;
+                              backColor2 = Colors.white.withOpacity(0.5);
+                              backColor3 = Colors.white.withOpacity(0.5);
+                              backColor1 = Colors.white.withOpacity(0.5);
+                            });
+                          }),
+                          child: Container(
+                            width: width / 2.4,
+                            decoration: BoxDecoration(
+                              color: backColor4,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "ThunderStorms",
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                )),
+          if (isplaying)
+            Positioned(
+                bottom: height / 30,
+                child: LottieBuilder.asset(
+                    height: 400, 'assets/lottie/sleep.json')),
           Positioned(
             left: 0,
             right: 0,
@@ -193,7 +256,7 @@ class _SleeppageState extends State<Sleeppage> {
                             showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return CupertinoAlertDialog(
+                                  return const CupertinoAlertDialog(
                                     title: Text("No Audio Selected"),
                                     content: Text(
                                         "Please select a background audio track"),
@@ -207,7 +270,7 @@ class _SleeppageState extends State<Sleeppage> {
                             });
                           }
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.play_circle_filled_rounded,
                           size: 80,
                           color: Colors.white,
@@ -222,55 +285,33 @@ class _SleeppageState extends State<Sleeppage> {
                             isplaying = false;
                           });
                         }),
-                        child: Icon(
+                        child: const Icon(
                           Icons.pause_circle_filled_rounded,
                           size: 80,
                           color: Colors.white,
                         )),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   !isplaying
                       ? Text(
                           start,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 60,
                           ),
                         )
                       : Text(
                           pause,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 60,
                           ),
                         ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (isplaying)
-                        LottieBuilder.asset(
-                          'assets/lottie/playing.json',
-                          width: 50,
-                          fit: BoxFit.contain,
-                        ),
-                      Text(
-                        isplaying ? "Jacob Piano -Interstellar" : " ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
           ),
-          Positioned(
-              bottom: height / 20,
-              child:
-                  LottieBuilder.asset(height: 400, 'assets/lottie/sleep.json'))
         ],
       ),
     );

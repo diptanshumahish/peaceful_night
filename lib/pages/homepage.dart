@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
 class HomePageScreen extends StatefulWidget {
@@ -19,7 +17,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   void initState() {
     _timeString = _formatDateTime(DateTime.now());
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
     super.initState();
   }
 
@@ -46,11 +44,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
       height: height,
       width: width,
       child: Stack(children: [
-        Container(
+        SizedBox(
           height: height,
           width: width,
           child: CachedNetworkImage(
@@ -73,15 +71,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
             left: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
+              children: const [
+                Text(
                   "Welcome friend",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 45,
                   ),
                 ),
-                const Text(
+                Text(
                   "Hope you are doing great!",
                   style: TextStyle(
                     color: Colors.white,
@@ -97,14 +95,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Quick Links",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 35,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -124,7 +122,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             fontSize: 40,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Icon(
                           CupertinoIcons.forward,
                           color: Colors.blue.shade200,
@@ -133,7 +131,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -153,7 +151,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             fontSize: 40,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Icon(
                           CupertinoIcons.forward,
                           color: Colors.pinkAccent.shade100,
@@ -162,12 +160,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Text(
                   _timeString,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 45,
@@ -189,7 +187,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     fontSize: 35,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(

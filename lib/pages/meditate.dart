@@ -34,7 +34,7 @@ double comp = 0.0;
 
 class _MeditateState extends State<Meditate> {
   void getTimer() {
-    Timer.periodic(Duration(milliseconds: 10), (timer) {
+    Timer.periodic(const Duration(milliseconds: 10), (timer) {
       setState(() {
         var totalDur = player.duration?.inSeconds;
         comp = (player.position.inSeconds / ((totalDur ?? 0))).toDouble();
@@ -88,7 +88,7 @@ class _MeditateState extends State<Meditate> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Meditation",
                     style: TextStyle(
                       color: Colors.white,
@@ -113,7 +113,7 @@ class _MeditateState extends State<Meditate> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (isSlected == false)
-                      Text(
+                      const Text(
                         "Select your desired backgrond audio",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -122,7 +122,7 @@ class _MeditateState extends State<Meditate> {
                         ),
                       ),
                     if (isSlected == true)
-                      Text(
+                      const Text(
                         "Currently playing :",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -130,7 +130,7 @@ class _MeditateState extends State<Meditate> {
                           fontSize: 25,
                         ),
                       ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -153,8 +153,8 @@ class _MeditateState extends State<Meditate> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
                                 color: backColor1),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 "Rain",
                                 style: TextStyle(
@@ -182,8 +182,8 @@ class _MeditateState extends State<Meditate> {
                               color: backColor2,
                               borderRadius: BorderRadius.circular(3),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 "Ocean Waves",
                                 textAlign: TextAlign.justify,
@@ -197,7 +197,7 @@ class _MeditateState extends State<Meditate> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -221,8 +221,8 @@ class _MeditateState extends State<Meditate> {
                               borderRadius: BorderRadius.circular(3),
                               color: backColor3,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 "Piano",
                                 style: TextStyle(
@@ -250,8 +250,8 @@ class _MeditateState extends State<Meditate> {
                               color: backColor4,
                               borderRadius: BorderRadius.circular(3),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 "ThunderStorms",
                                 textAlign: TextAlign.justify,
@@ -298,7 +298,7 @@ class _MeditateState extends State<Meditate> {
                             showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return CupertinoAlertDialog(
+                                  return const CupertinoAlertDialog(
                                     title: Text("No Audio Selected"),
                                     content: Text(
                                         "Please select a background audio track"),
@@ -312,7 +312,7 @@ class _MeditateState extends State<Meditate> {
                             });
                           }
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.play_circle_filled_rounded,
                           size: 80,
                           color: Colors.white,
@@ -327,25 +327,25 @@ class _MeditateState extends State<Meditate> {
                             isplaying = false;
                           });
                         }),
-                        child: Icon(
+                        child: const Icon(
                           Icons.pause_circle_filled_rounded,
                           size: 80,
                           color: Colors.white,
                         )),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   !isplaying
                       ? Text(
                           start,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 60,
                           ),
                         )
                       : Text(
                           pause,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 60,
                           ),
@@ -361,7 +361,7 @@ class _MeditateState extends State<Meditate> {
                         ),
                       Text(
                         isplaying ? "Jacob Piano -Interstellar" : " ",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                         ),
@@ -376,14 +376,15 @@ class _MeditateState extends State<Meditate> {
               bottom: height / 10,
               left: 0,
               right: 0,
-              child: Container(
+              child: SizedBox(
                   height: height / 5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         _printDuration(player.position),
-                        style: TextStyle(fontSize: 45, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 45, color: Colors.white),
                       ),
                       if (isplaying)
                         ElevatedButton(
@@ -399,17 +400,18 @@ class _MeditateState extends State<Meditate> {
                               });
                               getSong();
                             },
-                            child: Text(
+                            child: const Text(
                               "Stop current session",
                               style: TextStyle(fontSize: 30),
                             )),
-                      Spacer(),
+                      const Spacer(),
                       if (comp > 0.0 && comp < 0.2)
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
                             '" $text1 "',
-                            style: TextStyle(color: Colors.white, fontSize: 29),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 29),
                           ),
                         ),
                       if (comp > 0.2 && comp < 0.3)
@@ -417,7 +419,8 @@ class _MeditateState extends State<Meditate> {
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
                             '" $text2"',
-                            style: TextStyle(color: Colors.white, fontSize: 29),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 29),
                           ),
                         ),
                       if (comp > 0.3 && comp < 0.4)
@@ -425,7 +428,8 @@ class _MeditateState extends State<Meditate> {
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
                             '" $text3"',
-                            style: TextStyle(color: Colors.white, fontSize: 29),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 29),
                           ),
                         ),
                       if (comp > 0.4 && comp < 0.5)
@@ -433,7 +437,8 @@ class _MeditateState extends State<Meditate> {
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
                             '" $text4"',
-                            style: TextStyle(color: Colors.white, fontSize: 29),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 29),
                           ),
                         ),
                       if (comp > 0.5 && comp < 1)
@@ -441,7 +446,8 @@ class _MeditateState extends State<Meditate> {
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
                             '" $text5"',
-                            style: TextStyle(color: Colors.white, fontSize: 29),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 29),
                           ),
                         )
                     ],
